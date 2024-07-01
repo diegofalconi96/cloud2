@@ -1,0 +1,10 @@
+# Crear migraciones
+npx knex migrate:latest
+#Revertir cambios
+npx knex migrate:rollback
+
+#Para crear una clave foranea
+npx knex migrate:make add_foreign_key_to_venta
+
+#Para eliminar culumnas duplicadas
+npx knex migrate:make remove_duplicate_cliente_id_from_venta
