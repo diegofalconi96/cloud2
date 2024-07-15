@@ -1,38 +1,40 @@
+const { format } = require('mysql2');
 const { Model } = require('objection');
 
-class Order extends Model {
+class Product extends Model {
     static get tableName() {
-        return 'orders';
+        return 'productos';
     }
 
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['order_date'],
+            required: ['name', 'price'],
             properties: {
                 id: { type: 'integer' },
-                order_date: { type: 'string', format: 'date' },
+                name: { type: 'string', minLength: 1 },
+                price: { type: 'number' },
                 created_at: { type: 'string', format: 'date-time' },
                 updated_at: { type: 'string', format: 'date-time' }
             }
         };
     }
 
-    static async getOrders() {
-        return await Order.query();
+    static async getProducts() {
+        return await Product.query();
     }
 
     static async insert(data) {
-        return await Order.query().insert(data);
+        return await Product.query().insert(data);
     }
 
     static async update(data, id) {
-        return await Order.query().patchAndFetchById(id, data);
+        return await Product.query().patchAndFetchById(id, data);
     }
 
     static async delete(id) {
-        return await Order.query().deleteById(id);
+        return await Product.query().deleteById(id);
     }
 }
 
-module.exports = Order;
+module.exports = Product;

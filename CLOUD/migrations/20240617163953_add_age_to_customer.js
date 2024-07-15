@@ -4,8 +4,8 @@
  */
 exports.up = function(knex) {
     return knex.schema.alterTable('orders', function(table){
-      table.integer('fkid_employee').unsigned();
-      table.foreign('fkid_employee').references('id').inTable('employee');
+      table.integer('fkid_customer').unsigned();
+      table.foreign('fkid_customer').references('id').inTable('customer');
     });
   };
   
@@ -15,7 +15,7 @@ exports.up = function(knex) {
    */
   exports.down = function(knex) {
       return knex.schema.alterTable('orders', function(table){
-          table.dropForeign('fkid_employee');
-          table.dropColumn('fkid_employee');
-      });
+          table.dropForeign('fkid_customer');
+          table.dropColumn('fkid_customer');
+      });
   };

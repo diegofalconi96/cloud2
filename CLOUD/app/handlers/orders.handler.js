@@ -1,46 +1,52 @@
-const { response } = require('express');
-const Orders = require('../models/Orders');
+const Order = require('../models/Order');
 
-const listOrders = async(req, res) => {
-    try{
-        const orders = await Orders.getOrders();
-        res.json(orders);
+const listOrders = async (req, res) => {
+    try {
+        const orders = await Order.query();
+        res.json(orders); // Return JSON response
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-    catch(error){
-        res.status(500).json({error: error.message});
-    }
-}
+};
 
-const insertOrders = async(req, res) => {
-    try{
-        const orders = await Orders.insert(req.body);
-        res.status(201).json(orders);
-    }catch(error){
-        res.status(500).json({error: error.message})        
+const createOrder = async (req, res) => {
+    try {
+        const order = await Order.query().insert(req.body);
+        res.status(201).json(order);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-}
+};
 
-const updateOrders = async(req, res) => {
-    try{
-        const orders = await Orders.update(req.body, req.params.id);
-        res.json(orders);
-    }catch(error){
-        res.status(500).json({ error: error.message })
+const updateOrder = async (req, res) => {
+    try {
+        const orderId = req.params.id;
+        const order = await Order.query().patchAndFetchById(orderId, req.body);
+        if (!order) {
+            return res.status(404).json({ error: 'Order not found' });
+        }
+        res.json(order);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-}
+};
 
-const deleteOrders = async(req, res) => {
-    try{
-        const orders = await Orders.delete(req.params.id);
-        res.json(orders);
-    }catch(error){
-        res.status(500).json({ error:error.message })
+const deleteOrder = async (req, res) => {
+    try {
+        const orderId = req.params.id;
+        const deletedOrder = await Order.query().deleteById(orderId);
+        if (!deletedOrder) {
+            return res.status(404).json({ error: 'Order not found' });
+        }
+        res.json({ message: 'Order deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-}
+};
 
 module.exports = {
     listOrders,
-    insertOrders,
-    updateOrders,
-    deleteOrders
-}
+    createOrder,
+    updateOrder,
+    deleteOrder,
+};

@@ -1,56 +1,43 @@
-const { response } = require('express');
-const Customer = require('../models/Customer')
+const Customer= require('../models/Customer');
 
-//Crear una funcion para llamado a select del modelo
-// envio de parametro req y res
-// req significa request = peticion
-// res significa response = respuesta
-const listCustomer = async(req, res) => {
+
+const listCustomer = async (req, res)=>{
     try{
         const customer = await Customer.getCustomers();
-        res.json(customer); //parsea a json y retorna la respuesta
-    }
-    catch (error){
-        res.status(500).json({ error: error.message});
+        res.json(Customer);// parsea a json y retorna la respuesta
+    } catch (error){
+        res.status(500).json({error: error.message});
     }
 }
 
-const insertCustomer = async(req, res) => {
+const insertCustomer = async (req, res)=>{
     try{
-        const customer = await Customer.insert(req.body);
-        // 201 para crear
-        res.status(201).json(customer);
-    }
-    catch (error){
-        res.status(500).json({ error: error.message});
+        const customer =await Customer.insert(req.body);
+        res.status(201).json(customer)
+    } catch (error){
+        res.status(500).json({error: error.message});
     }
 }
-
-const updateCustomer = async(req, res) => {
+const updateCustomer = async (req, res)=>{
     try{
-        const customer = await Customer.update(req.body, req.params.id);
-        // 201 para crear
-        res.json(customer);
-    }
-    catch (error){
-        res.status(500).json({ error: error.message});
+        const customer =await Customer.update(req.body, req.params.id);
+        res.status(201).json(customer)
+    } catch (error){
+        res.status(500).json({error: error.message});
     }
 }
 
-const deleteCustomer = async(req, res) => {
+const deleteCustomer = async (req, res)=>{
     try{
-        const customer = await Customer.delete(req.params.id);
-        // 201 para crear
-        res.json(customer);
-    }
-    catch (error){
-        res.status(500).json({ error: error.message});
+        const customer =await Customer.delete(req.params.id);
+        res.status(201).json(customer)
+    } catch (error){
+        res.status(500).json({error: error.message});
     }
 }
-
 module.exports = {
     listCustomer,
     insertCustomer,
     updateCustomer,
-    deleteCustomer
-}
+    deleteCustomer,
+};

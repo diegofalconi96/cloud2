@@ -1,38 +1,39 @@
 const { Model } = require('objection');
 
-class Order extends Model {
+class Review extends Model {
     static get tableName() {
-        return 'orders';
+        return 'reviews';
     }
 
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['order_date'],
+            required: ['rating', 'comment'],
             properties: {
                 id: { type: 'integer' },
-                order_date: { type: 'string', format: 'date' },
+                rating: { type: 'integer' },
+                comment: { type: 'string', minLength: 1 },
                 created_at: { type: 'string', format: 'date-time' },
                 updated_at: { type: 'string', format: 'date-time' }
             }
         };
     }
 
-    static async getOrders() {
-        return await Order.query();
+    static async getReviews() {
+        return await Review.query();
     }
 
     static async insert(data) {
-        return await Order.query().insert(data);
+        return await Review.query().insert(data);
     }
 
     static async update(data, id) {
-        return await Order.query().patchAndFetchById(id, data);
+        return await Review.query().patchAndFetchById(id, data);
     }
 
     static async delete(id) {
-        return await Order.query().deleteById(id);
+        return await Review.query().deleteById(id);
     }
 }
 
-module.exports = Order;
+module.exports = Review;

@@ -1,8 +1,11 @@
-const Knex = require('knex')//llamafa a la libreria
-const {Model} = require('objection')//llamada a model objection
-const knexConfig = require('./knexfile')//llamda a la configuracion
+// db.js
+const knexLib = require('knex'); // llamar a la librería knex
+const { Model } = require('objection'); // llamado al objeto
+const knexConfig = require('./knexfile'); // Llamar a la configuración
 
-const knex = Knex(knexConfig.development)
-Model.knex(knex)
+// definir una variable
+const knexInstance = knexLib(knexConfig.development); // iniciar objeto
+Model.knex(knexInstance);  // configurar datos con objetos
 
-module.exports = knex;
+module.exports = knexInstance; // exportar configuración
+

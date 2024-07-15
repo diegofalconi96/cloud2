@@ -3,9 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-    return knex.schema.table('suppliers', function(table){
-        table.integer('lastName');
-    });
+  
 };
 
 /**
@@ -13,7 +11,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-    return knex.schema.table('suppliers',function(table){
-        table.dropColumn('lastName');
-    });
+  
 };

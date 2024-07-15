@@ -8,16 +8,17 @@ module.exports = {
   development: {
     client: 'mysql2',
     connection: {
-      host:'localhost',
+      host: '127.0.0.1',
       user: 'root',
-      password: '',
+      password:'',
       database: 'cloud'
     },
+    //definiendi directorio para las direcciones 
     migrations:{
       directory: './migrations'
     },
     seeds:{
-      directory:'./seeds'
+      directory: './seeds'
     }
   },
 

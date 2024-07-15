@@ -1,14 +1,14 @@
-//llamado a la libreria
-const express = require('express')
-const knex = require('./db')//llamado a la configuracion de la base de datos
-const router = require('./routers') //llamsdo a las rutas
+// importar librerias
+const express = require('express');
+const knex = require('./db');
+const routes = require('./routes'); // Asegúrate de que tu archivo de rutas se llame routes.js
 
-const app = express();//creamos una nueva instancia
-const port = 3000; //puerto de salida
+const app = express();
+const port = 3000;
 
-app.use(express.json());
-app.use('/api', router);
+app.use(express.json()); // Configurar tipo de dato JSON
+app.use('/api', routes); // Configurar la URL base y rutas
 
-app.listen(port,() => {
-    console.log(`servidor corriendo en el puerto ${port}`)
-})
+app.listen(port, () => {
+    console.log(`Servidor corriendo en el puerto ${port}`); // Corregir mensaje de console.log
+});

@@ -1,38 +1,38 @@
 const { Model } = require('objection');
 
-class Order extends Model {
+class Category extends Model {
     static get tableName() {
-        return 'orders';
+        return 'categorias';
     }
 
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['order_date'],
+            required: ['name'],
             properties: {
                 id: { type: 'integer' },
-                order_date: { type: 'string', format: 'date' },
+                name: { type: 'string', minLength: 1 },
                 created_at: { type: 'string', format: 'date-time' },
                 updated_at: { type: 'string', format: 'date-time' }
             }
         };
     }
 
-    static async getOrders() {
-        return await Order.query();
+    static async getCategories() {
+        return await Category.query();
     }
 
     static async insert(data) {
-        return await Order.query().insert(data);
+        return await Category.query().insert(data);
     }
 
     static async update(data, id) {
-        return await Order.query().patchAndFetchById(id, data);
+        return await Category.query().patchAndFetchById(id, data);
     }
 
     static async delete(id) {
-        return await Order.query().deleteById(id);
+        return await Category.query().deleteById(id);
     }
 }
 
-module.exports = Order;
+module.exports = Category;
