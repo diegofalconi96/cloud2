@@ -4,11 +4,12 @@ const knex = require('./db');
 const routes = require('./routes'); // Asegúrate de que tu archivo de rutas se llame routes.js
 
 const app = express();
-const port = 3000;
+const port = 4000; // Cambiar el puerto a 4000
 
 app.use(express.json()); // Configurar tipo de dato JSON
 app.use('/api', routes); // Configurar la URL base y rutas
 
 app.listen(port, () => {
-    console.log(`Servidor corriendo en el puerto ${port}`); // Corregir mensaje de console.log
+    console.log(`Servidor corriendo en el puerto ${port}`); // Corregir mensaje de console.log si es necesario
 });
+
