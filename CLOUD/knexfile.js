@@ -9,9 +9,9 @@ module.exports = {
     client: 'mysql2',
     connection: {
       host:'localhost',
-      user: 'root',
-      password: '',
-      database: 'cloud'
+      user: 'romel',
+      password: 'Abcd1234@',
+      database: 'cloud2'
     },
     migrations:{
       directory: './migrations'
