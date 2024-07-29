@@ -14,7 +14,7 @@ const config = {
         cors: {
             server: [
                 {
-                    origin: "*", //servidor que deseas que consuma o (*) en caso que sea acceso libre
+                    origin: "localhost:3000", //servidor que deseas que consuma o (*) en caso que sea acceso libre
                     credentials: true
                 }
             ]
@@ -22,8 +22,8 @@ const config = {
     }
 };
 
-const app = express();//creamos una nueva instancia
-const port = 3001; //puerto de salida
+const app = express(); //creamos una nueva instancia
+const port = 3000; //puerto de salida
 
 app.use(express.json());
 app.use(cors(config.application.cors.server));
