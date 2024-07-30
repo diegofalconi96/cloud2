@@ -11,11 +11,7 @@ module.exports = {
       host:'localhost',
       user: 'romel',
       password: 'Abcd1234@',
-<<<<<<< HEAD
       database: 'cloud2'
-=======
-      database: 'cloud'
->>>>>>> origin/romel_ante
     },
     migrations:{
       directory: './migrations'
