@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url(https://www.10wallpaper.com/wallpaper/1366x768/1504/oceanfront_phuket_thailand-photo_HD_wallpaper_1366x768.jpg);
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            background-size: cover; /* Ajusta la imagen para cubrir toda la ventana del navegador */
+            background-position: center; /* Centra la imagen en la ventana del navegador */
+            background-attachment: fixed; /* Mantiene la imagen fija durante el desplazamiento */
+        }
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+        }
+        nav {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        nav a:hover {
+            background-color: #495057;
+        }
+        .container {
+            padding: 20px;
+            flex: 1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: rgb(93, 180, 196); /* Fondo blanco para las tablas */
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h2 {
+            text-align: center;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="insertarcliente.html" target="_blank">Agregar Cliente</a>
+        <a href="insertarempleado.html" target="_blank">Agregar Empleado</a>
+        <a href="insertarinventario.html" target="_blank">Agregar Inventario</a>
+        <a href="insertarproductos.html" target="_blank">Agregar Productos</a>
+        <a href="insertarventa.html" target="_blank">Agregar Venta</a>
+    </nav>
+</header>
+
+<div class="container">
+    
+    <h2><center>Lista de Clientes</center></h2>
+    
+    <table id="clientesTable">
+        <thead>
+            <tr>
+               
+                <th><center>Nombre</center> </th>
+                <th><center>Apellido</center> </th>
+                <th><center>Cargo</center></th>
+                <th><center>Correo</center></th>
+                <th><center>Dirección</center> </th>
+                <th><center>Edad</center></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se llenará la tabla con datos obtenidos por AJAX -->
+        </tbody>
+    
+        
+    </table>
+    
+    <script>
+        /MOSTRAR DATOS EN TABLA USANDO FETCH/
+        document.addEventListener('DOMContentLoaded', fetchClientes);
+        async function fetchClientes() {
+            const response = await fetch('http://localhost:3000/api/customers');
+            const clientes = await response.json();
+            const tbody = document.getElementById('clientesTable').querySelector('tbody');
+            tbody.innerHTML = '';
+    
+            clientes.forEach(cliente => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+    
+                                 
+                    <td class="text-center">${cliente.nombre}</td>
+                    <td class="text-center">${cliente.apellido}</td>
+                    <td class="text-center">${cliente.cargo}</td>
+                    <td class="text-center">${cliente.correo}</td>
+                    <td class="text-center">${cliente.direccion}</td>
+                   
+                    <td class="text-center">${cliente.age}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+    </table>
+    
+    
+    
+    
+    
+    <!--METODO INVENTARIO-->
+    
+    <h2><center>Lista de Inventario</center></h2>
+    
+    <table id="inventariosTable">
+        <thead>
+            <tr>
+                <th><center>Producto</center></th>
+                <th><center>Cantidad</center> </th>
+                <th><center>Fecha De Ingreso</center> </th>
+                <th><center>Estado</center></th>
+                <th><center>Categoria</center></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se llenará la tabla con datos obtenidos por AJAX -->
+        </tbody>
+    
+        
+    </table>
+    
+    <script>
+        /MOSTRAR DATOS EN TABLA USANDO FETCH/
+        document.addEventListener('DOMContentLoaded', fetchInventarios);
+        async function fetchInventarios() {
+            const response = await fetch('http://localhost:3000/api/inventarios');
+            const inventarios = await response.json();
+            const tbody = document.getElementById('inventariosTable').querySelector('tbody');
+            tbody.innerHTML = '';
+    
+            inventarios.forEach(inventario => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                   
+                    <td class="text-center">${inventario.producto}</td>
+                    <td class="text-center">${inventario.cantidad}</td>
+                    <td class="text-center">${inventario.fechaingreso}</td>
+                    <td class="text-center">${inventario.estado}</td>
+                    <td class="text-center">${inventario.categoria}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+    </table>
+    
+    
+    
+    
+    <!--METODO EMPLEADOS-->
+    
+    <h2><center>Lista de Empleados</center></h2>
+    
+    <table id="empleadosTable">
+        <thead>
+            <tr>
+                <th><center>Nombre</center> </th>
+                <th><center>Apellido</center> </th>
+                <th><center>Cargo</center></th>
+                <th><center>Correo</center></th>
+                <th><center>Dirección</center> </th>
+                <th><center>Edad</center></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se llenará la tabla con datos obtenidos por AJAX -->
+        </tbody>
+    </table>
+    
+    <script>
+        // MOSTRAR DATOS EN TABLA USANDO FETCH
+        document.addEventListener('DOMContentLoaded', fetchEmpleados);
+        async function fetchEmpleados() {
+            const response = await fetch('http://localhost:3000/api/empleados');
+            const empleados = await response.json();
+            const tbody = document.getElementById('empleadosTable').querySelector('tbody');
+            tbody.innerHTML = '';
+    
+            empleados.forEach(empleado => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="text-center">${empleado.nombre}</td>
+                    <td class="text-center">${empleado.apellido}</td>
+                    <td class="text-center">${empleado.cargo}</td>
+                    <td class="text-center">${empleado.correo}</td>
+                    <td class="text-center">${empleado.direccion}</td>
+                    <td class="text-center">${empleado.age}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+    
+    
+    
+    
+    <!--METODO PRODUCTOS-->
+    
+    <h2><center>Lista de Productos</center></h2>
+    
+    <table id="productosTable">
+        <thead>
+            <tr>
+                <th> <center>Nombre</center></th>
+                <th><center>Descripción</center></th>
+                <th><center>Categoria</center> </th>
+                <th><center>Precio</center> </th>
+                <th><center>Sección</center></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se llenará la tabla con datos obtenidos por AJAX -->
+        </tbody>
+    </table>
+    
+    <script>
+        // MOSTRAR DATOS EN TABLA USANDO FETCH
+        document.addEventListener('DOMContentLoaded', fetchProductos);
+        async function fetchProductos() {
+            const response = await fetch('http://localhost:3000/api/productos');
+            const productos = await response.json();
+            const tbody = document.getElementById('productosTable').querySelector('tbody');
+            tbody.innerHTML = '';
+    
+            productos.forEach(producto => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="text-center">${producto.nombre}</td>
+                    <td class="text-center">${producto.descripcion}</td>
+                    <td class="text-center">${producto.categoria}</td>
+                    <td class="text-center">${producto.precio}</td>
+                    <td class="text-center">${producto.seccion}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+    
+    </body>
+    </html>
+
+<script>
+    function fetchData(url, tableId) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById(tableId).querySelector('tbody');
+                tbody.innerHTML = '';
+
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = Object.values(item).map(value => <td>${value}</td>).join('');
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+
+</script>
+
+</body>
+</html>
