@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregar Inventario</title>
+<style>
+    /* Estilos opcionales para mejorar la presentación */
+    body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-image: url(https://www.10wallpaper.com/wallpaper/1366x768/1504/oceanfront_phuket_thailand-photo_HD_wallpaper_1366x768.jpg);
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-size: cover; /* Ajusta la imagen para cubrir toda la ventana del navegador */
+    background-position: center; /* Centra la imagen en la ventana del navegador */
+    background-attachment: fixed; /* Mantiene la imagen fija durante el desplazamiento */
+}
+
+    form {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    label {
+        display: block;
+        margin: 10px 0 5px;
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    button {
+        padding: 10px 15px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+    .btn-back {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+</head>
+<body>
+<br>
+<br>
+<h2><center>Agregar Nuevo Inventario</center></h2>
+<br>
+<br>
+<form id="addInventoryForm">
+    <label for="producto">Producto:</label>
+    <input type="text" id="producto" name="producto" required>
+    
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" name="cantidad" required>
+    
+    <label for="fechaingreso">Fecha de Ingreso:</label>
+    <input type="date" id="fechaingreso" name="fechaingreso" required>
+    
+    <label for="estado">Estado:</label>
+    <input type="text" id="estado" name="estado" required>
+    
+    <label for="categoria">Categoría:</label>
+    <input type="text" id="categoria" name="categoria" required>
+    <br>
+    <br>
+    <center><button type="submit">Agregar Inventario</button></center> 
+</form>
+<br>
+<br>
+<br>
+<center><a href="menu.html" class="btn-back">Regresar al Inicio</a></center> 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('addInventoryForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const producto = document.getElementById('producto').value;
+            const cantidad = parseInt(document.getElementById('cantidad').value);
+            const fechaingreso = document.getElementById('fechaingreso').value;
+            const estado = document.getElementById('estado').value;
+            const categoria = document.getElementById('categoria').value;
+            
+            const inventario = {
+                producto,
+                cantidad,
+                fechaingreso,
+                estado,
+                categoria
+            };
+
+            try {
+                const response = await fetch('http://54.234.188.236:3000/api/inventarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(inventario)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al agregar el inventario');
+                }
+
+                alert('Inventario agregado con éxito');
+                document.getElementById('addInventoryForm').reset();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Hubo un error al agregar el inventario');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

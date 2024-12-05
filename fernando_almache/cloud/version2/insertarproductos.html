@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregar Producto</title>
+<style>
+    /* Estilos opcionales para mejorar la presentación */
+    body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-image: url(https://www.10wallpaper.com/wallpaper/1366x768/1504/oceanfront_phuket_thailand-photo_HD_wallpaper_1366x768.jpg);
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-size: cover; /* Ajusta la imagen para cubrir toda la ventana del navegador */
+    background-position: center; /* Centra la imagen en la ventana del navegador */
+    background-attachment: fixed; /* Mantiene la imagen fija durante el desplazamiento */
+    }
+    form {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    label {
+        display: block;
+        margin: 10px 0 5px;
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    button {
+        padding: 10px 15px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+    .btn-back {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+</head>
+<body>
+<br>
+<br>
+<h2><center>Agregar Nuevo Producto</center></h2>
+<br>
+<br>
+
+<form id="addProductForm">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" name="descripcion" required>
+    
+    <label for="categoria">Categoría:</label>
+    <input type="text" id="categoria" name="categoria" required>
+    
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio" name="precio" required>
+    
+    <label for="seccion">Sección:</label>
+    <input type="text" id="seccion" name="seccion" required>
+    <br>
+    <br>
+    
+    <center><button type="submit">Agregar Producto</button></center> 
+</form>
+<br>
+<br>
+<br>
+<center><a href="menu.html" class="btn-back">Regresar al Inicio</a></center> 
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('addProductForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const categoria = document.getElementById('categoria').value;
+            const precio = parseFloat(document.getElementById('precio').value);
+            const seccion = document.getElementById('seccion').value;
+            
+            const producto = {
+                nombre,
+                descripcion,
+                categoria,
+                precio,
+                seccion
+            };
+
+            try {
+                const response = await fetch('http://54.234.188.236:3000/api/productos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(producto)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al agregar el producto');
+                }
+
+                alert('Producto agregado con éxito');
+                document.getElementById('addProductForm').reset();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Hubo un error al agregar el producto');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
